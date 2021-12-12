@@ -8,5 +8,5 @@ app.get("/", function (req, res) {
 app.get("/get", function (req, res) {
     res.send("An example of a get request when accessing a page /get");
 });
-// eslint-disable-next-line no-undef
+
 app.listen(process.env.APP_PORT);
