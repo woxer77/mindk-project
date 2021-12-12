@@ -10,5 +10,3 @@ app.get("/get", function (req, res) {
 });
 // eslint-disable-next-line no-undef
 app.listen(process.env.APP_PORT);
-
-var test = "test"; // for eslint
