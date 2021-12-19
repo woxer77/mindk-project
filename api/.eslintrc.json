@@ -20,7 +20,7 @@
         "no-multiple-empty-lines": "error",
         "prefer-const": "error",
         "no-use-before-define": "error",
-        "quotes": ["error", "double"]
+        "quotes": ["error", "single"]
     },
     "plugins": [
         "prettier"
