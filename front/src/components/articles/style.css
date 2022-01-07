@@ -1,0 +1,18 @@
+.articleContainer {
+    width: 900px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    border-radius: 20px;
+    padding: 10px;
+
+    transform: translateX(-50%);
+    background-color: #a4a8b0;
+    color: #f0f4fc;
+    font-size: 18px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+}
