@@ -1,7 +1,18 @@
-import {AddNewPostComponent} from "../../components/addNewPost/addNewPostComponent";
+import React from 'react';
 
-export function AddNewPostContainer( {senderName, senderSurname, reactLogo, avatar, postText} ) {
-    const senderFullName = senderName + " " + senderSurname;
+import { AddNewPostComponent } from '../../components/addNewPost/addNewPostComponent';
 
-    return <AddNewPostComponent senderFullName={senderFullName} reactLogo={reactLogo} avatar={avatar} postText={postText} />
+export function AddNewPostContainer({
+  senderName, senderSurname, reactLogo, avatar, postText,
+}) {
+  const senderFullName = `${senderName} ${senderSurname}`;
+
+  return (
+    <AddNewPostComponent
+      senderFullName={senderFullName}
+      reactLogo={reactLogo}
+      avatar={avatar}
+      postText={postText}
+    />
+  );
 }
