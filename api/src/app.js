@@ -1,12 +1,23 @@
 const express = require('express');
+
+const config = require('./services/config');
+const usersRoutes = require('./routes/users');
+const postsRoutes = require('./routes/posts');
+const likesRoutes = require('./routes/likes');
+const commentsRoutes = require('./routes/comments');
+
 const app = express();
+const port = config.appPort;
 
-app.get('/', function (req, res) {
-    res.send('The connection to the 127.0.0.1:' + process.env.APP_PORT + ' was successfully created');
+app.use('/users', usersRoutes);
+app.use('/posts', postsRoutes);
+app.use('/likes', likesRoutes);
+app.use('/comments', commentsRoutes);
+
+app.get('/', (req, res) => {
+    res.send('Hi');
 });
 
-app.get('/get', function (req, res) {
-    res.send('An example of a get request when accessing a page /get');
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
 });
-
-app.listen(process.env.APP_PORT);
