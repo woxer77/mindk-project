@@ -13,10 +13,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:PostID', async (req, res) => {
+router.get('/:UserID/:PostID', async (req, res) => {
     try {
+        const reqUserID = req.params.UserID;
         const reqPostID = req.params.PostID;
         const like = await db.select().from('LikedUser-Post').where({
+            UserID: reqUserID,
             PostID: reqPostID
         });
 

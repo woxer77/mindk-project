@@ -13,12 +13,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:PostID', async (req, res) => {
+router.get('/:CommentID', async (req, res) => {
     try {
-        const reqPostID = req.params.PostID;
-        const allCommentsToPost = await db.select().from('Comments').where('PostID', reqPostID);
+        const reqCommentID = req.params.CommentID;
+        const post = await db.select().from('Comments').where('CommentID', reqCommentID);
 
-        res.status(200).json(allCommentsToPost);
+        res.status(200).json(post);
     } catch (err) {
         res.send(err);
     }

@@ -23,6 +23,28 @@ router.get('/for_all', async (req, res) => {
     }
 });
 
+router.get('/:PostID/comments', async (req, res) => {
+    try {
+        const reqPostID = req.params.PostID;
+        const allCommentsToPost = await db.select().from('Comments').where('PostID', reqPostID);
+
+        res.status(200).json(allCommentsToPost);
+    } catch (err) {
+        res.send(err);
+    }
+});
+
+router.get('/:PostID/likes', async (req, res) => {
+    try {
+        const reqPostID = req.params.PostID;
+        const allLikesToPost = await db.select().from('LikedUser-Post').where('PostID', reqPostID);
+
+        res.status(200).json(allLikesToPost);
+    } catch (err) {
+        res.send(err);
+    }
+});
+
 router.get('/:PostID', async (req, res) => {
     try {
         const reqPostID = req.params.PostID;
