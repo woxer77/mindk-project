@@ -10,6 +10,16 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
+    volumes:
+      - ./tmp/data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: woxer48@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: qwerty123
+    ports:
+      - "8889:80"
 
   adminer:
     image: adminer
