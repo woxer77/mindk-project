@@ -1,15 +1,55 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import './style.css';
 
-const Articles = ({
-  title, text, creator, creationDate,
-}) => (
-  <div className="articleContainer">
-    <p className="title">{title}</p>
-    <p className="text">{text}</p>
-    <p className="creator">{creator}</p>
-    <p className="creationDate">{creationDate}</p>
-  </div>
-);
+export function Articles({
+  text, creator, creationDate,
+}) {
+  const params = useParams();
 
-export default Articles;
+  function isUpperLetters(string) {
+    return /^[A-Z]+$/.test(string);
+  }
+
+  function isCorrectFormat(string) {
+    const arr = string.split('.');
+    const [fileName, ext] = arr;
+    const validFormats = ['doc', 'pdf', 'jpeg'];
+
+    if (/^[A-Za-z0-9]+$/.test(fileName) && validFormats.includes(ext) && arr.length === 2) return true;
+    return false;
+  }
+
+  if (Number.isInteger(Number(params.id))) {
+    return (
+      <div className="articleContainer">
+        <p className="title">{`Article with ID by number = ${params.id}`}</p>
+        <p className="text">{text}</p>
+        <p className="creator">{creator}</p>
+        <p className="creationDate">{creationDate}</p>
+      </div>
+    );
+  }
+  if (isUpperLetters(params.id)) {
+    return (
+      <div className="articleContainer">
+        <p className="title">{`Article with ID by upper letters = ${params.id}`}</p>
+        <p className="text">{text}</p>
+        <p className="creator">{creator}</p>
+        <p className="creationDate">{creationDate}</p>
+      </div>
+    );
+  }
+  if (isCorrectFormat(params.id)) {
+    return (
+      <div className="articleContainer">
+        <p className="title">{`Article with ID by a given format = ${params.id}`}</p>
+        <p className="text">{text}</p>
+        <p className="creator">{creator}</p>
+        <p className="creationDate">{creationDate}</p>
+      </div>
+    );
+  }
+  return (<div>Error 404</div>);
+}
