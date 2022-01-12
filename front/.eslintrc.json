@@ -34,6 +34,10 @@
         "react/prop-types": "off",
         "import/prefer-default-export": "off",
         "react/function-component-definition": "off",
-        "default-case": "off"
+        "default-case": "off",
+        "no-multi-assign": "warn",
+        "no-unused-vars": "warn",
+        "one-var-declaration-per-line": "warn",
+        "one-var": "warn"
     }
 }

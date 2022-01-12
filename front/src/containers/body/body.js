@@ -1,7 +1,8 @@
 import React from 'react';
-import Articles from '../../components/articles/articles';
-import AddArticle from '../../components/add article/addArticle';
-import Profile from '../../components/profile/profile';
+
+import { Articles } from '../../components/articles/articles';
+import { AddArticle } from '../../components/add article/addArticle';
+import { Profile } from '../../components/profile/profile';
 
 export function Body({ currentPage }) {
   switch (currentPage) {

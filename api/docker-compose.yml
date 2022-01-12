@@ -16,16 +16,10 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: woxer48@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: qwerty123
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
       - "8889:80"
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
 
   app:
     image: node:16
