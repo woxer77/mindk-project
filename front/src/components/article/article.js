@@ -2,10 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import './style.css';
+import PropTypes from 'prop-types';
 
-export function Articles({
+const Article = ({
   text, creator, creationDate,
-}) {
+}) => {
   const params = useParams();
 
   function isUpperLetters(string) {
@@ -52,4 +53,16 @@ export function Articles({
     );
   }
   return (<div>Error 404</div>);
-}
+};
+
+Article.propTypes = {
+  text: PropTypes.string.isRequired,
+  creator: PropTypes.string,
+  creationDate: PropTypes.string.isRequired,
+};
+
+Article.defaultProps = {
+  creator: 'unknown creator',
+};
+
+export default Article;

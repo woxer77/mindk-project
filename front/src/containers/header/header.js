@@ -4,7 +4,7 @@ import './style.css';
 
 export function Header({ setCurrentPage }) {
   const COMPONENTS_IDS = {
-    ARTICLES: 'articles',
+    ARTICLES: 'article',
     ADD_ARTICLE: 'addArticle',
     PROFILE: 'profile',
   };
@@ -23,7 +23,7 @@ export function Header({ setCurrentPage }) {
 //
 // export function Header({ setCurrentPage }) {
 //   const COMPONENTS_IDS = {
-//     ARTICLES: 'articles',
+//     ARTICLES: 'article',
 //     ADD_ARTICLE: 'addArticle',
 //     PROFILE: 'profile',
 //   };
@@ -35,7 +35,7 @@ export function Header({ setCurrentPage }) {
 //
 //   return (
 //     <header>
-//       <button type="button" onClick={setPage(COMPONENTS_IDS.ARTICLES)}> Articles </button>
+//       <button type="button" onClick={setPage(COMPONENTS_IDS.ARTICLES)}> Article </button>
 //       <button type="button" onClick={setPage(COMPONENTS_IDS.ADD_ARTICLE)}> Add Article </button>
 //       <button type="button" onClick={setPage(COMPONENTS_IDS.PROFILE)}> Profile </button>
 //     </header>
