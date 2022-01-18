@@ -2,6 +2,8 @@ import React from 'react';
 import './style.css';
 
 export function AddArticle() {
+  throw Error; // for test ErrorBoundary
+
   return (
     <div className="addArticleContainer">
       <p>

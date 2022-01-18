@@ -31,13 +31,15 @@
             1,
             { "extensions": [".js", ".jsx"] }
         ],
-        "react/prop-types": "off",
+        "react/prop-types": "warn",
         "import/prefer-default-export": "off",
         "react/function-component-definition": "off",
         "default-case": "off",
         "no-multi-assign": "warn",
         "no-unused-vars": "warn",
         "one-var-declaration-per-line": "warn",
-        "one-var": "warn"
+        "one-var": "warn",
+        "react/destructuring-assignment": "warn",
+        "no-unreachable": "warn"
     }
 }
