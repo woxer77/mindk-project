@@ -1,8 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import './style.css';
 import PropTypes from 'prop-types';
+import { ShowArticleByNumber } from '../../components/article/articleByNumber';
+import { ShowArticleByFormat } from '../../components/article/articleByFormat';
+import { ShowArticleByUpLetters } from '../../components/article/articleByUpLetters';
 
 const Article = ({
   text, creator, creationDate,
@@ -24,32 +26,32 @@ const Article = ({
 
   if (Number.isInteger(Number(params.id))) {
     return (
-      <div className="articleContainer">
-        <p className="title">{`Article with ID by number = ${params.id}`}</p>
-        <p className="text">{text}</p>
-        <p className="creator">{creator}</p>
-        <p className="creationDate">{creationDate}</p>
-      </div>
+      <ShowArticleByNumber
+        id={params.id}
+        text={text}
+        creator={creator}
+        creationDate={creationDate}
+      />
     );
   }
   if (isUpperLetters(params.id)) {
     return (
-      <div className="articleContainer">
-        <p className="title">{`Article with ID by upper letters = ${params.id}`}</p>
-        <p className="text">{text}</p>
-        <p className="creator">{creator}</p>
-        <p className="creationDate">{creationDate}</p>
-      </div>
+      <ShowArticleByUpLetters
+        id={params.id}
+        text={text}
+        creator={creator}
+        creationDate={creationDate}
+      />
     );
   }
   if (isCorrectFormat(params.id)) {
     return (
-      <div className="articleContainer">
-        <p className="title">{`Article with ID by a given format = ${params.id}`}</p>
-        <p className="text">{text}</p>
-        <p className="creator">{creator}</p>
-        <p className="creationDate">{creationDate}</p>
-      </div>
+      <ShowArticleByFormat
+        id={params.id}
+        text={text}
+        creator={creator}
+        creationDate={creationDate}
+      />
     );
   }
   return (<div>Error 404</div>);

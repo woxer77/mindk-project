@@ -8,10 +8,10 @@ import {
 import './App.css';
 
 import ErrorBoundary from './components/ErrorBoudnary';
-import Article from './components/article/article';
+import Article from './containers/article/article';
 import { AddArticle } from './components/add article/addArticle';
 import Profile from './components/profile/profile';
-import { DateComp } from './components/date/date';
+import { DateCont } from './containers/date/date';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             <Route path="/" element={<p>Hello, this is main page</p>} />
             <Route path="*" element={<div>Error 404</div>} />
             <Route path="/article/add-article" element={<AddArticle />} />
-            <Route path="/date/:date" element={<DateComp />} />
+            <Route path="/date/:date" element={<DateCont />} />
 
             <Route
               path="/article/:id"

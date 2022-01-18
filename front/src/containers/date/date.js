@@ -1,19 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-
-import './style.css';
+import { ShowDatePage } from '../../components/date/showDatePage';
 
 let year;
 let month;
 let day;
 
-function getTodayDate() {
-  const today = new Date();
-  return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-}
-
-export function DateComp() {
+export function DateCont() {
   const params = useParams();
+
+  function getTodayDate() {
+    const today = new Date();
+    return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+  }
 
   function isDateCorrect(string) {
     const arr = string.split('-');
@@ -27,19 +26,12 @@ export function DateComp() {
 
   if (isDateCorrect(params.date)) {
     return (
-      <div className="dateContainer">
-        <p>
-          The date of your request:
-          {' '}
-          {`${year}-${month}-${day}`}
-        </p>
-        <p>
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
-          Today's date:
-          {' '}
-          {getTodayDate()}
-        </p>
-      </div>
+      <ShowDatePage
+        year={year}
+        month={month}
+        day={day}
+        todayDate={getTodayDate()}
+      />
     );
   }
   return (<div>Error 404</div>);
