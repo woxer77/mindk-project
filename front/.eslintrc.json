@@ -40,6 +40,10 @@
         "one-var-declaration-per-line": "warn",
         "one-var": "warn",
         "react/destructuring-assignment": "warn",
-        "no-unreachable": "warn"
+        "no-unreachable": "warn",
+        "arrow-body-style": "warn",
+        "react/jsx-no-useless-fragment": "warn",
+        "jsx-a11y/click-events-have-key-events": "warn",
+        "jsx-a11y/no-static-element-interactions": "warn"
     }
 }
