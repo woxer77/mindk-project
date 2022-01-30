@@ -9,23 +9,23 @@ export function ShowAllPosts({
   return (
     <div className="postsContainer">
       {posts?.map(({
-        PostID, Text, CreationDate, CreationTime,
+        postId, text, creationDate, creationTime,
       }) => (
-        <div className="postBlock" id={`postBlock-${PostID}`} key={`postBlock-${PostID}`}>
+        <div className="postBlock" id={`postBlock-${postId}`} key={`postBlock-${postId}`}>
           <div className="number">
             Post №
             {' '}
-            {PostID}
+            {postId}
           </div>
           <div className="text">
-            {Text}
+            {text}
           </div>
           <div className="infoRow">
             <p className="creationDate">
-              {CreationDate}
+              {creationDate}
             </p>
             <p className="creationTime">
-              {CreationTime}
+              {creationTime}
             </p>
           </div>
         </div>

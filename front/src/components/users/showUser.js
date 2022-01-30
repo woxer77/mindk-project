@@ -7,29 +7,40 @@ import usersProps from '../../PropTypes/usersProps';
 export function ShowUser({
   users,
 }) {
+  // сделал константой, т.к. если передавать строку напрямую в аргумент - выбивает ошибку
+  // Cannot read properties of null (reading 'value')
+  const action = `http://localhost:2001/users/${users[0].userId}/avatar`;
   return (
     <div className="usersContainer">
       {users?.map(({
-        UserID, FirstName, SecondName, MiddleName, Email, Phone,
+        userId, firstName, secondName, middleName, email, phone,
       }) => (
-        <div className="userBlock" id={UserID}>
+        <div className="userBlock" id={userId}>
           <div className="fullName">
-            {SecondName}
+            {secondName}
             {' '}
-            {FirstName}
+            {firstName}
             {' '}
-            {MiddleName}
+            {middleName}
           </div>
           <p>Personal information</p>
           <div className="infoRow">
             <div className="infoRowTitle">Email:</div>
             {' '}
-            {Email}
+            {email}
           </div>
           <div className="infoRow">
             <div className="infoRowTitle">Phone number:</div>
             {' '}
-            {Phone}
+            {phone}
+          </div>
+          <div className="infoRow">
+            <div className="infoRowTitle">Avatar adding:</div>
+            {' '}
+            <form encType="multipart/form-data" action={action} method="POST">
+              <input type="file" name="avatar" />
+              <button type="submit">Send an avatar</button>
+            </form>
           </div>
         </div>
       ))}
@@ -42,7 +53,7 @@ ShowUser.propTypes = usersProps;
 ShowUser.defaultProps = {
   user: PropTypes.arrayOf(
     PropTypes.shape({
-      Avatar: '',
+      avatar: null,
     }),
   ),
 };

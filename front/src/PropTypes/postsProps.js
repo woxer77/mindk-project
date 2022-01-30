@@ -3,14 +3,14 @@ const PropTypes = require('prop-types');
 module.exports = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
-      PostID: PropTypes.number.isRequired,
-      Text: PropTypes.string.isRequired,
-      CreationDate: PropTypes.string.isRequired,
-      CreationTime: PropTypes.string.isRequired,
-      LikesNumber: PropTypes.number.isRequired,
-      CommentsNumber: PropTypes.number.isRequired,
-      Availability: PropTypes.string.isRequired,
-      CreatorID: PropTypes.number.isRequired,
+      postId: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      creationDate: PropTypes.string.isRequired,
+      creationTime: PropTypes.string.isRequired,
+      likesNumber: PropTypes.number.isRequired,
+      commentsNumber: PropTypes.number.isRequired,
+      availability: PropTypes.string.isRequired,
+      creatorId: PropTypes.number.isRequired,
     }),
   ),
 };
