@@ -4,13 +4,18 @@ import { getUsers } from './api/crud';
 import { ShowAllUsers } from '../../components/users/showAllUsers';
 
 const UsersContainer = () => {
-  const { isFetching, data } = useQuery('users', () => getUsers());
+  const { status, error, data } = useQuery('users', () => getUsers());
   const users = data?.data || [];
 
   return (
     <>
-      {isFetching && <div>Loading your page...</div>}
-      <ShowAllUsers users={users} />
+      {status === 'loading' ? (
+        <div>Loading your page...</div>
+      ) : status === 'error' ? (
+        error.message
+      ) : (
+        <ShowAllUsers users={users} />
+      )}
     </>
   );
 };
