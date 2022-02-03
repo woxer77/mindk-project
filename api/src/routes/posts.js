@@ -1,56 +1,35 @@
 const router = require('express').Router();
-const db = require('../services/db');
+const postsService = require('../services/store/posts.service');
 
 module.exports = router;
 
 router.get('/', async (req, res) => {
     try {
-        const posts = await db.select().from('Posts').orderBy('PostID');
-
-        res.status(200).json(posts);
+        res.status(200).json(await postsService.getAllPosts());
     } catch (err) {
         res.send(err);
     }
 });
 
-router.get('/for_all', async (req, res) => {
+router.get('/:id/comments', async (req, res) => {
     try {
-        const postsForAll = await db.select().from('Posts').where('Availability', 'for all').orderBy('PostID');
-
-        res.status(200).json(postsForAll);
+        res.status(200).json(await postsService.getPostComments(req.params.id));
     } catch (err) {
         res.send(err);
     }
 });
 
-router.get('/:PostID/comments', async (req, res) => {
+router.get('/:id/likes', async (req, res) => {
     try {
-        const reqPostID = req.params.PostID;
-        const allCommentsToPost = await db.select().from('Comments').where('PostID', reqPostID);
-
-        res.status(200).json(allCommentsToPost);
+        res.status(200).json(await postsService.getPostLikes(req.params.id));
     } catch (err) {
         res.send(err);
     }
 });
 
-router.get('/:PostID/likes', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const reqPostID = req.params.PostID;
-        const allLikesToPost = await db.select().from('LikedUser-Post').where('PostID', reqPostID);
-
-        res.status(200).json(allLikesToPost);
-    } catch (err) {
-        res.send(err);
-    }
-});
-
-router.get('/:PostID', async (req, res) => {
-    try {
-        const reqPostID = req.params.PostID;
-        const post = await db.select().from('Posts').where('PostID', reqPostID);
-
-        res.status(200).json(post);
+        res.status(200).json(await postsService.getPostById(req.params.id));
     } catch (err) {
         res.send(err);
     }
@@ -58,29 +37,25 @@ router.get('/:PostID', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const reqBody = req.body;
-        db.insert(reqBody).into('Posts');
+        await postsService.createNewPost(req.body);
         res.status(200).send('New post has been successfully created');
     } catch (err) {
         res.send(err);
     }
 });
 
-router.put('/:PostID', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        const reqPostID = req.params.PostID;
-        const reqBody = req.body;
-        await db.select().from('Posts').where('PostID', reqPostID).update(reqBody);
+        await postsService.updatePostById(req.params.id, req.body);
         res.status(200).send('User was successfully updated');
     } catch (err) {
         res.send(err);
     }
 });
 
-router.delete('/:PostID', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        const reqPostID = req.params.PostID;
-        await db.select().from('Posts').where('PostID', reqPostID).del();
+        await postsService.deletePostById(req.params.id);
         res.status(200).send('User was successfully deleted');
     } catch (err) {
         res.send(err);

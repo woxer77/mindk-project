@@ -11,26 +11,26 @@ export function ShowAllUsers({
   return (
     <div className="usersContainer">
       {users?.map(({
-        UserID, FirstName, SecondName, MiddleName, Email, Phone,
+        userId, firstName, secondName, middleName, email, phone,
       }) => (
-        <Link to={`/users/${UserID}`} className="userBlock" id={`userBlock-${UserID}`} key={`userBlock-${UserID}`}>
+        <Link to={`/users/${userId}`} className="userBlock" id={`userBlock-${userId}`} key={`userBlock-${userId}`}>
           <div className="fullName">
-            {SecondName}
+            {secondName}
             {' '}
-            {FirstName}
+            {firstName}
             {' '}
-            {MiddleName}
+            {middleName}
           </div>
           <p>Personal information</p>
           <div className="infoRow">
             <div className="infoRowTitle">Email:</div>
             {' '}
-            {Email}
+            {email}
           </div>
           <div className="infoRow">
             <div className="infoRowTitle">Phone number:</div>
             {' '}
-            {Phone}
+            {phone}
           </div>
         </Link>
       ))}
@@ -43,7 +43,7 @@ ShowAllUsers.propTypes = usersProps;
 ShowAllUsers.defaultProps = {
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      Avatar: '',
+      avatar: null,
     }),
   ),
 };

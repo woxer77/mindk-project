@@ -9,13 +9,20 @@ const UserContainer = () => {
   const { id } = params;
 
   if (Number.isInteger(Number(id))) {
-    const { isFetching, data } = useQuery(`users/${id}`, () => getUser(id));
+    const {
+      status, error, data,
+    } = useQuery(`users/${id}`, () => getUser(id));
     const user = data?.data || [];
 
     return (
       <>
-        {isFetching && <div>Loading your page...</div>}
-        <ShowUser users={user} />
+        {status === 'loading' ? (
+          <div>Loading your page...</div>
+        ) : status === 'error' ? (
+          error.message
+        ) : (
+          <ShowUser users={user} />
+        )}
       </>
     );
   }
