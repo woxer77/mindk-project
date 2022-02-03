@@ -1,36 +1,47 @@
 import React from 'react';
-
-import './style.css';
+import { Box, Container } from '@mui/material';
 import postsProps from '../../PropTypes/postsProps';
+import './posts.css';
 
 export function ShowAllPosts({
   posts,
 }) {
   return (
-    <div className="postsContainer">
+    <Container maxWidth="sm">
       {posts?.map(({
-        PostID, Text, CreationDate, CreationTime,
+        postId, text, creationDate, creationTime,
       }) => (
-        <div className="postBlock" id={`postBlock-${PostID}`} key={`postBlock-${PostID}`}>
+        <Box
+          sx={{
+            width: 550,
+            height: 200,
+            margin: '20px',
+            borderRadius: '10px',
+            backgroundColor: '#eef1eb',
+          }}
+          className="postBlock"
+          id={`postBlock-${postId}`}
+          key={`postBlock-${postId}`}
+        >
           <div className="number">
             Post №
             {' '}
-            {PostID}
+            {postId}
           </div>
-          <div className="text">
-            {Text}
-          </div>
+          <Box className="text">
+            {text}
+          </Box>
           <div className="infoRow">
             <p className="creationDate">
-              {CreationDate}
+              {creationDate}
             </p>
             <p className="creationTime">
-              {CreationTime}
+              {creationTime}
             </p>
           </div>
-        </div>
+        </Box>
       ))}
-    </div>
+    </Container>
   );
 }
 

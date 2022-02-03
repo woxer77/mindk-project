@@ -4,13 +4,18 @@ import { getPosts } from './api/crud';
 import { ShowAllPosts } from '../../components/posts/showAllPosts';
 
 const PostsContainer = () => {
-  const { isFetching, data } = useQuery('posts', () => getPosts());
+  const { status, error, data } = useQuery('posts', () => getPosts());
   const posts = data?.data;
 
   return (
     <>
-      {isFetching && <div>Loading...</div>}
-      <ShowAllPosts posts={posts} />
+      {status === 'loading' ? (
+        <div>Loading your page...</div>
+      ) : status === 'error' ? (
+        error.message
+      ) : (
+        <ShowAllPosts posts={posts} />
+      )}
     </>
   );
 };

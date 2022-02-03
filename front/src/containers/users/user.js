@@ -11,6 +11,7 @@ const UserContainer = () => {
   if (Number.isInteger(Number(id))) {
     const { isFetching, data } = useQuery(`users/${id}`, () => getUser(id));
     const user = data?.data || [];
+    console.log(user);
 
     return (
       <>
