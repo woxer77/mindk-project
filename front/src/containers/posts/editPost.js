@@ -1,16 +1,18 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { getUser } from './api/crud';
-import { ShowUser } from '../../components/users/showUser';
+import { EditPost } from '../../components/posts/editPost';
+import { getPost } from './api/crud';
 
-const UserContainer = () => {
+const EditPostContainer = () => {
   const params = useParams();
   const { id } = params;
 
   if (Number.isInteger(Number(id))) {
-    const { status, error, data } = useQuery(`users/${id}`, () => getUser(id));
-    const user = data?.data || [];
+    const {
+      status, error, data,
+    } = useQuery(`posts/${id}`, () => getPost(id));
+    const post = data?.data || [];
 
     return (
       <>
@@ -19,12 +21,13 @@ const UserContainer = () => {
         ) : status === 'error' ? (
           error.message
         ) : (
-          <ShowUser user={user} />
+          <EditPost post={post} />
         )}
       </>
     );
   }
+
   return <div>Error 404</div>;
 };
 
-export default UserContainer;
+export default EditPostContainer;

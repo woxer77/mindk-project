@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Article from '../article/article';
-import { AddArticle } from '../../components/add article/addArticle';
+import { AddArticle } from '../../components/posts/addPost';
 import Profile from '../../components/profile/profile';
 
 export function Body({ currentPage }) {

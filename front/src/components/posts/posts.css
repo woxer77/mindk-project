@@ -1,0 +1,27 @@
+.postBlock .number {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.postBlock .text {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.postBlock .infoRow p {
+    margin: 10px;
+}
+
+.postBlock .infoRow {
+    position: relative;
+}
+
+.postBlock .infoRow .creationDate {
+    position: absolute;
+    left: 0px;
+}
+
+.postBlock .infoRow .creationTime {
+    position: absolute;
+    right: 0px;
+}

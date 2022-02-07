@@ -19,7 +19,7 @@ export function Header({ setCurrentPage }) {
 }
 
 // import React from 'react';
-// import './style.css';
+// import './posts.css';
 //
 // export function Header({ setCurrentPage }) {
 //   const COMPONENTS_IDS = {

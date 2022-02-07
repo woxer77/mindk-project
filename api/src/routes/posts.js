@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         await postsService.updatePostById(req.params.id, req.body);
-        res.status(200).send('User was successfully updated');
+        res.status(200).send('Post was successfully updated');
     } catch (err) {
         res.send(err);
     }
@@ -56,7 +56,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         await postsService.deletePostById(req.params.id);
-        res.status(200).send('User was successfully deleted');
+        res.status(200).send('Post was successfully deleted');
     } catch (err) {
         res.send(err);
     }

@@ -2,14 +2,16 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { getUser } from './api/crud';
-import { ShowUser } from '../../components/users/showUser';
+import { EditUser } from '../../components/users/editUser';
 
-const UserContainer = () => {
+const EditUserContainer = () => {
   const params = useParams();
   const { id } = params;
 
   if (Number.isInteger(Number(id))) {
-    const { status, error, data } = useQuery(`users/${id}`, () => getUser(id));
+    const {
+      status, error, data,
+    } = useQuery(`users/${id}`, () => getUser(id));
     const user = data?.data || [];
 
     return (
@@ -19,7 +21,7 @@ const UserContainer = () => {
         ) : status === 'error' ? (
           error.message
         ) : (
-          <ShowUser user={user} />
+          <EditUser users={user} />
         )}
       </>
     );
@@ -27,4 +29,4 @@ const UserContainer = () => {
   return <div>Error 404</div>;
 };
 
-export default UserContainer;
+export default EditUserContainer;

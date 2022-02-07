@@ -1,13 +1,16 @@
 import React from 'react';
 
 import './style.css';
+import {
+  Box,
+} from '@mui/material';
 import profileProps from '../../PropTypes/profileProps';
 import defaultProfileProps from '../../PropTypes/profileDefaultProps';
 
 const Profile = ({
   fullName, birthDate, placeOfBirth, educationPlace, phoneNumber, user,
 }) => (
-  <div className="profileContainer">
+  <Box sx={{ width: '50%' }} className="profileContainer">
     <p>
       Name:
       {fullName}
@@ -33,7 +36,7 @@ const Profile = ({
       <br />
       {JSON.stringify(user)}
     </p>
-  </div>
+  </Box>
 );
 
 Profile.propTypes = profileProps;

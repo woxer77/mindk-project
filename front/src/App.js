@@ -10,12 +10,14 @@ import './App.css';
 
 import ErrorBoundary from './components/ErrorBoudnary';
 import Article from './containers/article/article';
-import { AddArticle } from './components/add article/addArticle';
 import Profile from './components/profile/profile';
 import { DateCont } from './containers/date/date';
 import PostsContainer from './containers/posts/posts';
 import UsersContainer from './containers/users/users';
 import UserContainer from './containers/users/user';
+import AddPostContainer from './containers/posts/addPost';
+import EditPostContainer from './containers/posts/editPost';
+import EditUserContainer from './containers/users/editUser';
 
 const queryClient = new QueryClient();
 
@@ -28,11 +30,13 @@ function App() {
             <Routes>
               <Route path="/" element={<p>Hello, this is main page</p>} />
               <Route path="*" element={<div>Error 404</div>} />
-              <Route path="/article/add-article" element={<AddArticle />} />
               <Route path="/date/:date" element={<DateCont />} />
               <Route path="/posts" element={<PostsContainer />} />
+              <Route path="/posts/add-post" element={<AddPostContainer />} />
+              <Route path="/posts/:id/edit-post" element={<EditPostContainer />} />
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/users/:id" element={<UserContainer />} />
+              <Route path="/users/:id/edit-user" element={<EditUserContainer />} />
 
               <Route
                 path="/article/:id"

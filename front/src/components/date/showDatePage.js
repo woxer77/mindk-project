@@ -1,13 +1,16 @@
 import React from 'react';
 
 import './style.css';
+import {
+  Box,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 
 export function ShowDatePage({
   year, month, day, todayDate,
 }) {
   return (
-    <div className="dateContainer">
+    <Box sx={{ width: '35%' }} className="dateContainer">
       <p>
         The date of your request:
         {' '}
@@ -19,7 +22,7 @@ export function ShowDatePage({
         {' '}
         {todayDate}
       </p>
-    </div>
+    </Box>
   );
 }
 
