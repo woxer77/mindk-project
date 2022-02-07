@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useMutation } from 'react-query';
 import * as Yup from 'yup';
 import {
-  Button, FormControl, InputLabel, MenuItem, Select, TextareaAutosize, TextField,
+  Button, FormControl, InputLabel, MenuItem, Select, TextareaAutosize, TextField, Typography,
 } from '@mui/material';
 import { editPost } from '../../containers/posts/api/crud';
 import postsProps from '../../PropTypes/postsProps';
@@ -12,9 +12,14 @@ export function EditPost({
   post,
 }) {
   const schema = Yup.object().shape({
-    creatorId: Yup.number().required().positive().integer(),
-    availability: Yup.string().required(),
-    text: Yup.string().required(),
+    creatorId: Yup.number()
+      .required('The field is required to be filled')
+      .positive('The field must be filled with a positive number')
+      .integer('The field must be filled with an integer'),
+    availability: Yup.string()
+      .required('The field is required to be filled'),
+    text: Yup.string()
+      .required('The field is required to be filled'),
   });
 
   const mutateHook = useMutation(
@@ -38,13 +43,14 @@ export function EditPost({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <p>
+      <div>{JSON.stringify(formik.errors)}</div>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Edit post №
         {post[0].postId}
-      </p>
-      <p>
+      </Typography>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter ID of the post creator in the field below:
-      </p>
+      </Typography>
       <TextField
         id="outlined-basic"
         name="creatorId"
@@ -53,9 +59,9 @@ export function EditPost({
         onChange={formik.handleChange}
         value={formik.values.creatorId}
       />
-      <p>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Select post availability:
-      </p>
+      </Typography>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-autowidth-label">Availability</InputLabel>
         <Select
@@ -71,16 +77,18 @@ export function EditPost({
           <MenuItem value="for me">For me</MenuItem>
         </Select>
       </FormControl>
-      <p>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter text of the post in the field below:
-      </p>
-      <TextareaAutosize
+      </Typography>
+      <TextField
         name="text"
-        aria-label="minimum height"
-        minRows={4}
+        id="outlined-multiline-static"
+        label="Multiline"
+        multiline
+        rows={5}
         placeholder="Your post text..."
         style={{
-          width: 200,
+          width: 350,
           marginBottom: '10px',
         }}
         onChange={formik.handleChange}

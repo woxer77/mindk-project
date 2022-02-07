@@ -5,7 +5,7 @@ import { ShowAllPosts } from '../../components/posts/showAllPosts';
 
 const PostsContainer = () => {
   const { status, error, data } = useQuery('posts', () => getPosts());
-  const posts = data?.data;
+  const posts = data?.data || [];
 
   return (
     <>

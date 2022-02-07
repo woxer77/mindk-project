@@ -13,13 +13,13 @@ export function ShowAllUsers({
 }) {
   return (
     <Box sx={{ width: '80%' }} className="usersContainer">
-      <Grid container justifyContent="space-around" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container justifyContent="space-around">
         {users?.map(({
           userId, firstName, secondName, middleName, email, phone,
         }) => (
-          <Grid item xs={5} className="userBlock">
-            <Link to={`/users/${userId}`} id={`userBlock-${userId}`} key={`userBlock-${userId}`} className="userBlock-link">
-              <div className="fullName" item xs={6}>
+          <Grid className="userBlock" key={`userBlock-${userId}`} id={`userBlock-${userId}`}>
+            <Link to={`/users/${userId}`} className="userBlock-link">
+              <div className="fullName">
                 {secondName}
                 {' '}
                 {firstName}
@@ -27,12 +27,12 @@ export function ShowAllUsers({
                 {middleName}
               </div>
               <p>Personal information</p>
-              <div className="infoRow" item xs={6}>
+              <div className="infoRow">
                 <div className="infoRowTitle">Email:</div>
                 {' '}
                 {email}
               </div>
-              <div className="infoRow" item xs={6}>
+              <div className="infoRow">
                 <div className="infoRowTitle">Phone number:</div>
                 {' '}
                 {phone}

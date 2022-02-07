@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useMutation } from 'react-query';
 import * as Yup from 'yup';
 import {
-  Button, TextField,
+  Button, TextField, Typography, Alert,
 } from '@mui/material';
 import './style.css';
 import PropTypes from 'prop-types';
@@ -15,30 +15,30 @@ export function EditUser({
 }) {
   const schema = Yup.object().shape({
     firstName: Yup.string()
-      .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
-      .min(2, 'Too Short!')
-      .max(32)
-      .required(),
+      .matches(/^[A-Za-z ]*$/, 'Only uppercase and lowercase Latin letters are allowed')
+      .min(2, 'The minimum allowed number of characters is 2')
+      .max(32, 'The maximum allowed number of characters is 32')
+      .required('The field is required to be filled'),
     secondName: Yup.string()
-      .matches(/^[A-Za-z ]*$/, 'Please enter valid second name')
-      .min(2, 'Too Short!')
-      .max(64)
-      .required(),
+      .matches(/^[A-Za-z ]*$/, 'Only uppercase and lowercase Latin letters are allowed')
+      .min(2, 'The minimum allowed number of characters is 2')
+      .max(64, 'The maximum allowed number of characters is 64')
+      .required('The field is required to be filled'),
     middleName: Yup.string()
-      .matches(/^[A-Za-z ]*$/, 'Please enter valid middle name')
-      .min(2, 'Too Short!')
-      .max(32)
-      .required(),
+      .matches(/^[A-Za-z ]*$/, 'Only uppercase and lowercase Latin letters are allowed')
+      .min(2, 'The minimum allowed number of characters is 2')
+      .max(32, 'The maximum allowed number of characters is 32')
+      .required('The field is required to be filled'),
     email: Yup.string()
-      .email('Invalid email')
-      .max(128)
-      .required(),
+      .email('Invalid email address format')
+      .max(128, 'The maximum allowed number of characters is 128')
+      .required('The field is required to be filled'),
     phone: Yup.string()
-      .matches(/^\+380\d{9}$/)
-      .required(),
+      .matches(/^\+380\d{9}$/, 'Invalid phone number format')
+      .required('The field is required to be filled'),
     avatar: Yup.string()
-      .max(64)
-      .required(),
+      .max(64, 'The maximum allowed number of characters is 64')
+      .required('The field is required to be filled'),
   });
 
   const mutateHook = useMutation(
@@ -65,13 +65,14 @@ export function EditUser({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <p>
+      <div>{JSON.stringify(formik.errors)}</div>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Edit user №
         {users[0].userId}
-      </p>
-      <p>
+      </Typography>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter first name:
-      </p>
+      </Typography>
       <TextField
         id="outlined-basic"
         name="firstName"
@@ -80,9 +81,9 @@ export function EditUser({
         onChange={formik.handleChange}
         value={formik.values.firstName}
       />
-      <p>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter second name:
-      </p>
+      </Typography>
       <TextField
         id="outlined-basic"
         name="secondName"
@@ -91,9 +92,9 @@ export function EditUser({
         onChange={formik.handleChange}
         value={formik.values.secondName}
       />
-      <p>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter middle name:
-      </p>
+      </Typography>
       <TextField
         id="outlined-basic"
         name="middleName"
@@ -102,9 +103,9 @@ export function EditUser({
         onChange={formik.handleChange}
         value={formik.values.middleName}
       />
-      <p>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter email:
-      </p>
+      </Typography>
       <TextField
         id="outlined-basic"
         name="email"
@@ -113,9 +114,9 @@ export function EditUser({
         onChange={formik.handleChange}
         value={formik.values.email}
       />
-      <p>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter phone number:
-      </p>
+      </Typography>
       <TextField
         id="outlined-basic"
         name="phone"
@@ -124,9 +125,9 @@ export function EditUser({
         onChange={formik.handleChange}
         value={formik.values.phone}
       />
-      <p>
+      <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter the path to the avatar:
-      </p>
+      </Typography>
       <TextField
         id="outlined-basic"
         name="avatar"
