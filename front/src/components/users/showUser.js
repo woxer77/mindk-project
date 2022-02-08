@@ -10,9 +10,6 @@ import usersProps from '../../PropTypes/usersProps';
 export function ShowUser({
   user,
 }) {
-  // сделал константой, т.к. если передавать строку напрямую в аргумент - выбивает ошибку
-  // Cannot read properties of null (reading 'value')
-  const action = `http://localhost:2001/users/${users[0].userId}/avatar`;
   return (
     <Box sx={{ width: '80%' }} className="usersContainer">
       <Grid className="userBlock">
