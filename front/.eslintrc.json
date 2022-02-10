@@ -27,6 +27,7 @@
         "prefer-const": "error",
         "no-use-before-define": "error",
         "quotes": ["error", "single"],
+        "indent": ["error", 2],
         "react/jsx-filename-extension": [
             1,
             { "extensions": [".js", ".jsx"] }
