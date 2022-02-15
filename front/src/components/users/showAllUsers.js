@@ -15,7 +15,7 @@ export function ShowAllUsers({
     <Box sx={{ width: '80%' }} className="usersContainer">
       <Grid container justifyContent="space-around">
         {users?.map(({
-          userId, firstName, secondName, middleName, email, phone,
+          userId, firstName, secondName, middleName, email, phone, country,
         }) => (
           <Grid className="userBlock" key={`userBlock-${userId}`} id={`userBlock-${userId}`}>
             <Link to={`/users/${userId}`} className="userBlock-link">
@@ -36,6 +36,11 @@ export function ShowAllUsers({
                 <div className="infoRowTitle">Phone number:</div>
                 {' '}
                 {phone}
+              </div>
+              <div className="infoRow">
+                <div className="infoRowTitle">Country:</div>
+                {' '}
+                {country}
               </div>
             </Link>
           </Grid>

@@ -20,7 +20,6 @@ router.get('/:id/posts', asyncErrorHandler(async (req, res) => {
 
 router.get('/:id/avatar', asyncErrorHandler(async (req, res) => {
   const userAvatar = await usersService.getUserAvatar(req.params.id);
-
   res.status(200).sendFile(`${userAvatar[0].avatar}`, {root: path.dirname('')});
 }));
 
@@ -39,7 +38,8 @@ router.post('/', asyncErrorHandler(async (req, res) => {
   res.status(200).send('New user has been successfully created');
 }));
 
-router.put('/:id', asyncErrorHandler(async (req, res) => {
+router.put('/:id', upload.single('avatar'), asyncErrorHandler(async (req, res) => {
+  req.body.avatar = req.file.path;
   await usersService.updateUser(req.params.id, req.body);
   res.status(200).send('User was successfully updated');
 }));

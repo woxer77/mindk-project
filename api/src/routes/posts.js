@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const upload = require('../services/multer');
 const postsService = require('../services/store/posts.service');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
+const path = require('path');
 
 module.exports = router;
 
@@ -20,12 +22,19 @@ router.get('/:id', asyncErrorHandler(async (req, res) => {
   res.status(200).json(await postsService.getPostById(req.params.id));
 }));
 
-router.post('/', asyncErrorHandler(async (req, res) => {
+router.get('/:id/image', asyncErrorHandler(async (req, res) => {
+  const postImage = await postsService.getPostImage(req.params.id);
+  res.status(200).sendFile(`${postImage[0].image}`, {root: path.dirname('')});
+}));
+
+router.post('/', upload.single('image'), asyncErrorHandler(async (req, res) => {
+  req.body.image = req.file.path;
   await postsService.createNewPost(req.body);
   res.status(200).send('New post has been successfully created');
 }));
 
-router.put('/:id', asyncErrorHandler(async (req, res) => {
+router.put('/:id', upload.single('image'), asyncErrorHandler(async (req, res) => {
+  req.body.image = req.file.path;
   await postsService.updatePostById(req.params.id, req.body);
   res.status(200).send('Post was successfully updated');
 }));
