@@ -32,6 +32,11 @@ export function ShowUser({
           {user[0].phone}
         </div>
         <div className="infoRow">
+          <div className="infoRowTitle">Country:</div>
+          {' '}
+          {user[0].country}
+        </div>
+        <div className="infoRow">
           <div className="infoRowTitle">Avatar adding:</div>
           {' '}
           <form

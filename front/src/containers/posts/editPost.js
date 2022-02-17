@@ -14,6 +14,17 @@ const EditPostContainer = () => {
     } = useQuery(`posts/${id}`, () => getPost(id));
     const post = data?.data || [];
 
+    const options = [
+      { value: 'for all', label: 'All' },
+      { value: 'for friends', label: 'Friends' },
+      { value: 'for me', label: 'Me' },
+    ];
+
+    const getDefaultLabel = (optionsArr) => {
+      const optionsValueArr = optionsArr.map((e) => e.value);
+      return options[optionsValueArr.indexOf(post[0].availability)].label;
+    };
+
     return (
       <>
         {status === 'loading' ? (
@@ -21,7 +32,7 @@ const EditPostContainer = () => {
         ) : status === 'error' ? (
           error.message
         ) : (
-          <EditPost post={post} />
+          <EditPost post={post} options={options} defaultLabel={getDefaultLabel(options)} />
         )}
       </>
     );

@@ -14,7 +14,6 @@ router.get('/:id', asyncErrorHandler(async (req, res) => {
 
 router.post('/', asyncErrorHandler(async (req, res) => {
   await commentsService.createNewComment(req.body);
-  console.log(req.body);
   res.status(200).send('New comment has been successfully created');
 }));
 
