@@ -50,7 +50,7 @@ export function EditUser({
   });
 
   const mutateHook = useMutation(
-    (data) => editUser(users[0].userId, data),
+    (data) => editUser(users.userId, data),
   );
 
   const onFormSubmit = (data) => {
@@ -72,13 +72,13 @@ export function EditUser({
 
   const formik = useFormik({
     initialValues: {
-      firstName: users[0].firstName,
-      secondName: users[0].secondName,
-      middleName: users[0].middleName,
-      email: users[0].email,
-      phone: users[0].phone,
-      avatar: users[0].avatar,
-      country: users[0].country,
+      firstName: users.firstName,
+      secondName: users.secondName,
+      middleName: users.middleName,
+      email: users.email,
+      phone: users.phone,
+      avatar: users.avatar,
+      country: users.country,
     },
     validationSchema: schema,
     onSubmit: (data) => onFormSubmit(data),
@@ -116,7 +116,7 @@ export function EditUser({
       { console.log(JSON.stringify(formik.errors)) }
       <Typography variant="h6" gutterBottom component="div">
         Edit user №
-        {users[0].userId}
+        {users.userId}
       </Typography>
       <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter first name:
@@ -176,8 +176,8 @@ export function EditUser({
       <Typography margin="15px" variant="h6" gutterBottom component="div">
         Choose image:
       </Typography>
-      {users[0].avatar && (
-        <img src={`http://localhost:2001/users/${users[0].userId}/avatar`} alt="" width={300} />
+      {users.avatar && (
+        <img src={`http://localhost:2001/users/${users.userId}/avatar`} alt="" width={300} />
       )}
       <Box width="600px" margin="0 auto">
         {!image && (

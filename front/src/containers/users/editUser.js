@@ -267,12 +267,12 @@ const EditUserContainer = () => {
 
     const getDefaultCode = (countriesArr) => {
       const countriesLabelArr = countriesArr.map((e) => e.label);
-      return countries[countriesLabelArr.indexOf(user[0].country)].code;
+      return countries[countriesLabelArr.indexOf(user.country)].code;
     };
 
     const getDefaultPhone = (countriesArr) => {
       const countriesLabelArr = countriesArr.map((e) => e.label);
-      return countries[countriesLabelArr.indexOf(user[0].country)].phone;
+      return countries[countriesLabelArr.indexOf(user.country)].phone;
     };
 
     return (

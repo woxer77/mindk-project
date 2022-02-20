@@ -1,3 +1,6 @@
+const UnauthorizedException = require('../exceptions/UnauthorizedException');
+const NotFoundException = require('../exceptions/NotFoundException');
+
 module.exports = (options) => {
   const { db, dbTableName } = options;
 
@@ -9,6 +12,8 @@ module.exports = (options) => {
     })
       .into(dbTableName)
       .then(() => {
+        if (error instanceof NotFoundException) return res.status(404).send({ error: error.message });
+        else if (error instanceof UnauthorizedException) return res.status(401).send({ error: 'Unauthorized' });
         res.send('Something went wrong');
         next();
       });
