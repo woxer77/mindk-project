@@ -3,9 +3,9 @@ import { useFormik } from 'formik';
 import { useMutation } from 'react-query';
 import * as Yup from 'yup';
 import {
-  Button, TextField, Typography, Autocomplete, Box,
+  Button, TextField, Typography, Autocomplete, Box, Modal,
 } from '@mui/material';
-import './style.css';
+import './modalStyle.css';
 import PropTypes from 'prop-types';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
@@ -21,6 +21,7 @@ export function EditUser({
   const [image, setImage] = useState();
   const [croppedImage, setCroppedImage] = useState();
   const [cropper, setCropper] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const schema = Yup.object().shape({
     firstName: Yup.string()
@@ -109,147 +110,166 @@ export function EditUser({
     setImage(null);
   };
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
-    <form onSubmit={formik.handleSubmit}>
-      { console.log(JSON.stringify(formik.errors)) }
-      <Typography variant="h6" gutterBottom component="div">
-        Edit user №
-        {users.userId}
-      </Typography>
-      <Typography margin="15px" variant="h6" gutterBottom component="div">
-        Enter first name:
-      </Typography>
-      <TextField
-        id="outlined-basic"
-        name="firstName"
-        label="First name"
-        variant="outlined"
-        onChange={formik.handleChange}
-        value={formik.values.firstName}
-      />
-      <Typography margin="15px" variant="h6" gutterBottom component="div">
-        Enter second name:
-      </Typography>
-      <TextField
-        id="outlined-basic"
-        name="secondName"
-        label="Second name"
-        variant="outlined"
-        onChange={formik.handleChange}
-        value={formik.values.secondName}
-      />
-      <Typography margin="15px" variant="h6" gutterBottom component="div">
-        Enter middle name:
-      </Typography>
-      <TextField
-        id="outlined-basic"
-        name="middleName"
-        label="Middle name"
-        variant="outlined"
-        onChange={formik.handleChange}
-        value={formik.values.middleName}
-      />
-      <Typography margin="15px" variant="h6" gutterBottom component="div">
-        Enter email:
-      </Typography>
-      <TextField
-        id="outlined-basic"
-        name="email"
-        label="Email"
-        variant="outlined"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-      <Typography margin="15px" variant="h6" gutterBottom component="div">
-        Enter phone number:
-      </Typography>
-      <TextField
-        id="outlined-basic"
-        name="phone"
-        label="Phone number"
-        variant="outlined"
-        onChange={formik.handleChange}
-        value={formik.values.phone}
-      />
-      <Typography margin="15px" variant="h6" gutterBottom component="div">
-        Choose image:
-      </Typography>
-      {users.avatar && (
-        <img src={`http://localhost:${appPort}/users/${users.userId}/avatar`} alt="" width={300} />
-      )}
-      <Box width="600px" margin="0 auto">
-        {!image && (
-          <Button variant="contained" component="label">
-            Edit image
-            <input type="file" hidden onChange={handleChange} />
-          </Button>
-        )}
-        {image && <Button variant="contained" onClick={deleteImage}>Delete image</Button>}
-        {image && (
-          <Cropper
-            src={image}
-            onInitialized={(instance) => setCropper(instance)}
-            rotatable={false}
-            viewMode={1}
-            minCropBoxWidth={100}
-            minCropBoxHeight={100}
-            autoCropArea={1}
-          />
-        )}
-        {image && (
-          <Button variant="contained" onClick={cropImage}>Crop</Button>
-        )}
-      </Box>
-      <Typography margin="15px" variant="h6" gutterBottom component="div">
-        Choose your country:
-      </Typography>
-      <Autocomplete
-        id="country-select-demo"
-        sx={{
-          width: '300px',
-          margin: '0 auto',
-        }}
-        defaultValue={{
-          code: defaultCode,
-          label: formik.values.country,
-          phone: defaultPhone,
-        }}
-        options={countries}
-        autoHighlight
-        getOptionLabel={(option) => option.label}
-        onChange={(_, country) => {
-          if (country !== null) formik.setFieldValue('country', `${country.label}`);
-          else formik.setFieldValue('country', '');
-        }}
-        renderOption={(props, option) => (
-          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-            <img
-              loading="lazy"
-              width="20"
-              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-              alt=""
+    <>
+      <Button variant="contained" onClick={openModal}>Open modal</Button>
+      <Modal
+        open={isModalOpen}
+        onClose={closeModal}
+        className="modalStyle"
+      >
+        <Box className="boxStyle">
+          <form onSubmit={formik.handleSubmit}>
+            { console.log(JSON.stringify(formik.errors)) }
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Edit user №
+              {users.userId}
+            </Typography>
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Enter first name:
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              name="firstName"
+              label="First name"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.firstName}
+              className="modalAlignCenter"
             />
-            {option.label}
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Enter second name:
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              name="secondName"
+              label="Second name"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.secondName}
+              className="modalAlignCenter"
+            />
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Enter middle name:
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              name="middleName"
+              label="Middle name"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.middleName}
+              className="modalAlignCenter"
+            />
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Enter email:
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              name="email"
+              label="Email"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              className="modalAlignCenter"
+            />
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Enter phone number:
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              name="phone"
+              label="Phone number"
+              variant="outlined"
+              onChange={formik.handleChange}
+              value={formik.values.phone}
+              className="modalAlignCenter"
+            />
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Choose image:
+            </Typography>
+            {users.avatar && (
+              <img src={`http://localhost:${appPort}/users/${users.userId}/avatar`} alt="" width={300} />
+            )}
+            <Box width="600px">
+              {!image && (
+                <Button variant="contained" component="label" className="modalAlignCenter">
+                  Edit image
+                  <input type="file" hidden onChange={handleChange} />
+                </Button>
+              )}
+              {image && <Button variant="contained" className="modalAlignCenter" onClick={deleteImage}>Delete image</Button>}
+              {image && (
+                <Cropper
+                  src={image}
+                  onInitialized={(instance) => setCropper(instance)}
+                  rotatable={false}
+                  viewMode={1}
+                  minCropBoxWidth={100}
+                  minCropBoxHeight={100}
+                  autoCropArea={1}
+                />
+              )}
+              {image && (
+                <Button variant="contained" className="modalAlignCenter" onClick={cropImage}>Crop</Button>
+              )}
+            </Box>
+            <Typography variant="h6" gutterBottom component="div" className="modalText">
+              Choose your country:
+            </Typography>
+            <Autocomplete
+              id="country-select-demo"
+              sx={{
+                width: '300px',
+                margin: '0 auto',
+              }}
+              defaultValue={{
+                code: defaultCode,
+                label: formik.values.country,
+                phone: defaultPhone,
+              }}
+              options={countries}
+              autoHighlight
+              getOptionLabel={(option) => option.label}
+              onChange={(_, country) => {
+                if (country !== null) formik.setFieldValue('country', `${country.label}`);
+                else formik.setFieldValue('country', '');
+              }}
+              renderOption={(props, option) => (
+                <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                  <img
+                    loading="lazy"
+                    width="20"
+                    src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                    srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                    alt=""
+                  />
+                  {option.label}
+                  {' '}
+                  (
+                  {option.code}
+                  ) +
+                  {option.phone}
+                </Box>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  onChange={formik.handleChange}
+                  label="Choose a country"
+                />
+              )}
+            />
             {' '}
-            (
-            {option.code}
-            ) +
-            {option.phone}
-          </Box>
-        )}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            onChange={formik.handleChange}
-            label="Choose a country"
-          />
-        )}
-      />
-      {' '}
-      <br />
-      <Button variant="outlined" type="submit">Edit user</Button>
-    </form>
+            <br />
+            <Button variant="outlined" type="submit" className="modalAlignCenter">Edit user</Button>
+          </form>
+        </Box>
+      </Modal>
+    </>
   );
 }
 
