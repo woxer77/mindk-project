@@ -13,6 +13,7 @@ import { serialize } from 'object-to-formdata';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import usersProps from '../../PropTypes/usersProps';
 import { editUser } from '../../containers/users/api/crud';
+import { maxUploadImageSize, fileTypeImage, appPort } from '../../config/config';
 
 export function EditUser({
   users, countries, defaultCode, defaultPhone,
@@ -20,9 +21,6 @@ export function EditUser({
   const [image, setImage] = useState();
   const [croppedImage, setCroppedImage] = useState();
   const [cropper, setCropper] = useState();
-
-  const MAX_IMAGE_SIZE = 10000000;
-  const FILE_TYPE_IMAGE = 'image.*';
 
   const schema = Yup.object().shape({
     firstName: Yup.string()
@@ -50,7 +48,7 @@ export function EditUser({
   });
 
   const mutateHook = useMutation(
-    (data) => editUser(users[0].userId, data),
+    (data) => editUser(users.userId, data),
   );
 
   const onFormSubmit = (data) => {
@@ -72,13 +70,13 @@ export function EditUser({
 
   const formik = useFormik({
     initialValues: {
-      firstName: users[0].firstName,
-      secondName: users[0].secondName,
-      middleName: users[0].middleName,
-      email: users[0].email,
-      phone: users[0].phone,
-      avatar: users[0].avatar,
-      country: users[0].country,
+      firstName: users.firstName,
+      secondName: users.secondName,
+      middleName: users.middleName,
+      email: users.email,
+      phone: users.phone,
+      avatar: users.avatar,
+      country: users.country,
     },
     validationSchema: schema,
     onSubmit: (data) => onFormSubmit(data),
@@ -88,7 +86,7 @@ export function EditUser({
     e.preventDefault();
     const file = e.target.files[0];
 
-    if (file.type.match(FILE_TYPE_IMAGE) && file.size < MAX_IMAGE_SIZE) {
+    if (file.type.match(fileTypeImage) && file.size < maxUploadImageSize) {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
@@ -116,7 +114,7 @@ export function EditUser({
       { console.log(JSON.stringify(formik.errors)) }
       <Typography variant="h6" gutterBottom component="div">
         Edit user №
-        {users[0].userId}
+        {users.userId}
       </Typography>
       <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter first name:
@@ -176,8 +174,8 @@ export function EditUser({
       <Typography margin="15px" variant="h6" gutterBottom component="div">
         Choose image:
       </Typography>
-      {users[0].avatar && (
-        <img src={`http://localhost:2001/users/${users[0].userId}/avatar`} alt="" width={300} />
+      {users.avatar && (
+        <img src={`http://localhost:${appPort}/users/${users.userId}/avatar`} alt="" width={300} />
       )}
       <Box width="600px" margin="0 auto">
         {!image && (

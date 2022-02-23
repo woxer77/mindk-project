@@ -10,9 +10,7 @@ const AddPostContainer = () => {
 
     return `${year}-${month}-${day}`;
   };
-  const currentTime = () => {
-    return new Date().toLocaleTimeString();
-  };
+  const currentTime = () => new Date().toLocaleTimeString();
 
   return (
     <AddPost currentDate={currentDate} currentTime={currentTime} />

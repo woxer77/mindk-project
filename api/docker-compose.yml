@@ -14,7 +14,7 @@ services:
       - ./tmp/data:/var/lib/postgresql/data
     networks:
       mynetwork:
-        ipv4_address: 172.20.0.2
+        ipv4_address: ${DB_NETWORK_IPV4}
 
   pgadmin:
     image: dpage/pgadmin4
@@ -25,7 +25,7 @@ services:
       - "8889:80"
     networks:
       mynetwork:
-        ipv4_address: 172.20.0.3
+        ipv4_address: ${PG_ADMIN_NETWORK_IPV4}
 
   app:
     image: node:16
@@ -34,13 +34,13 @@ services:
       - ${APP_PORT}:${APP_PORT}
     volumes:
       - ./:/src
-    command: sh -c "npx nodemon -r dotenv/config src/app.js"
+    command: sh -c "npx nodemon --legacy-watch -r dotenv/config src/app.js"
     networks:
       mynetwork:
-        ipv4_address: 172.20.0.4
+        ipv4_address: ${APP_NETWORK_IPV4}
 
 networks:
   mynetwork:
     ipam:
       config:
-        - subnet: 172.20.0.0/24
+        - subnet: ${NETWORK_SUBNET}

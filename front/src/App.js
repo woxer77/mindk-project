@@ -18,6 +18,7 @@ import UserContainer from './containers/users/user';
 import AddPostContainer from './containers/posts/addPost';
 import EditPostContainer from './containers/posts/editPost';
 import EditUserContainer from './containers/users/editUser';
+import AuthContainer from './containers/auth/auth';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ function App() {
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/users/:id" element={<UserContainer />} />
               <Route path="/users/:id/edit-user" element={<EditUserContainer />} />
+              <Route path="/auth" element={<AuthContainer />} />
 
               <Route
                 path="/article/:id"

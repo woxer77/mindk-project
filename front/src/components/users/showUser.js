@@ -6,6 +6,7 @@ import {
   Grid, Box,
 } from '@mui/material';
 import usersProps from '../../PropTypes/usersProps';
+import { appPort } from '../../config/config';
 
 export function ShowUser({
   user,
@@ -14,34 +15,34 @@ export function ShowUser({
     <Box sx={{ width: '80%' }} className="usersContainer">
       <Grid className="userBlock">
         <div className="fullName">
-          {user[0].secondName}
+          {user.secondName}
           {' '}
-          {user[0].firstName}
+          {user.firstName}
           {' '}
-          {user[0].middleName}
+          {user.middleName}
         </div>
         <p>Personal information</p>
         <div className="infoRow">
           <div className="infoRowTitle">Email:</div>
           {' '}
-          {user[0].email}
+          {user.email}
         </div>
         <div className="infoRow">
           <div className="infoRowTitle">Phone number:</div>
           {' '}
-          {user[0].phone}
+          {user.phone}
         </div>
         <div className="infoRow">
           <div className="infoRowTitle">Country:</div>
           {' '}
-          {user[0].country}
+          {user.country}
         </div>
         <div className="infoRow">
           <div className="infoRowTitle">Avatar adding:</div>
           {' '}
           <form
             encType="multipart/form-data"
-            action={`http://localhost:2001/users/${user[0].userId}/avatar`}
+            action={`http://localhost:${appPort}/users/${user.userId}/avatar`}
             method="POST"
           >
             <input type="file" name="avatar" />

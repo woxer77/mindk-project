@@ -22,7 +22,7 @@ const EditPostContainer = () => {
 
     const getDefaultLabel = (optionsArr) => {
       const optionsValueArr = optionsArr.map((e) => e.value);
-      return options[optionsValueArr.indexOf(post[0].availability)].label;
+      return options[optionsValueArr.indexOf(post.availability)].label;
     };
 
     return (

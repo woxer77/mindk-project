@@ -10,6 +10,7 @@ import Cropper from 'react-cropper';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import PropTypes from 'prop-types';
 import { createPost } from '../../containers/posts/api/crud';
+import { maxUploadImageSize, fileTypeImage } from '../../config/config';
 
 export function AddPost({
   currentDate, currentTime,
@@ -17,9 +18,6 @@ export function AddPost({
   const [image, setImage] = useState();
   const [croppedImage, setCroppedImage] = useState();
   const [cropper, setCropper] = useState();
-
-  const MAX_IMAGE_SIZE = 10000000;
-  const FILE_TYPE_IMAGE = 'image.*';
 
   const schema = Yup.object().shape({
     creatorId: Yup.number()
@@ -70,7 +68,7 @@ export function AddPost({
     e.preventDefault();
     const file = e.target.files[0];
 
-    if (file.type.match(FILE_TYPE_IMAGE) && file.size < MAX_IMAGE_SIZE) {
+    if (file.type.match(fileTypeImage) && file.size < maxUploadImageSize) {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);

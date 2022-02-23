@@ -15,6 +15,7 @@ import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import PropTypes from 'prop-types';
 import { editPost } from '../../containers/posts/api/crud';
 import postsProps from '../../PropTypes/postsProps';
+import { maxUploadImageSize, fileTypeImage, appPort } from '../../config/config';
 
 export function EditPost({
   post, options, defaultLabel,
@@ -22,9 +23,6 @@ export function EditPost({
   const [image, setImage] = useState();
   const [croppedImage, setCroppedImage] = useState();
   const [cropper, setCropper] = useState();
-
-  const MAX_IMAGE_SIZE = 10000000;
-  const FILE_TYPE_IMAGE = 'image.*';
 
   const schema = Yup.object().shape({
     creatorId: Yup.number()
@@ -38,7 +36,7 @@ export function EditPost({
   });
 
   const mutateHook = useMutation(
-    (data) => editPost(post[0].postId, data),
+    (data) => editPost(post.postId, data),
   );
 
   const onFormSubmit = (data) => {
@@ -57,9 +55,9 @@ export function EditPost({
 
   const formik = useFormik({
     initialValues: {
-      availability: post[0].availability,
-      creatorId: post[0].creatorId,
-      text: post[0].text,
+      availability: post.availability,
+      creatorId: post.creatorId,
+      text: post.text,
     },
     validationSchema: schema,
     onSubmit: (data) => onFormSubmit(data),
@@ -69,7 +67,7 @@ export function EditPost({
     e.preventDefault();
     const file = e.target.files[0];
 
-    if (file.type.match(FILE_TYPE_IMAGE) && file.size < MAX_IMAGE_SIZE) {
+    if (file.type.match(fileTypeImage) && file.size < maxUploadImageSize) {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
@@ -97,7 +95,7 @@ export function EditPost({
       { console.log(JSON.stringify(formik.errors)) }
       <Typography margin="15px" variant="h6" gutterBottom component="div">
         Edit post №
-        {post[0].postId}
+        {post.postId}
       </Typography>
       <Typography margin="15px" variant="h6" gutterBottom component="div">
         Enter ID of the post creator in the field below:
@@ -157,8 +155,8 @@ export function EditPost({
       <Typography margin="15px" variant="h6" gutterBottom component="div">
         Choose image:
       </Typography>
-      {post[0].image && (
-        <img src={`http://localhost:2001/posts/${post[0].postId}/image`} alt="" width={300} />
+      {post.image && (
+        <img src={`http://localhost:${appPort}/posts/${post.postId}/image`} alt="" width={300} />
       )}
       <Box width="600px" margin="0 auto">
         {!image && (

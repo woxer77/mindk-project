@@ -3,6 +3,7 @@ const usersService = require('../services/store/users.service');
 const upload = require('../services/multer');
 const path = require('path');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 module.exports = router;
 
@@ -33,13 +34,13 @@ router.post('/:id/avatar', upload.single('avatar'), asyncErrorHandler(async (req
   }
 }));
 
-router.post('/', asyncErrorHandler(async (req, res) => {
+router.post('/', authMiddleware, asyncErrorHandler(async (req, res) => {
   await usersService.createNewUser(req.body);
   res.status(200).send('New user has been successfully created');
 }));
 
 router.put('/:id', upload.single('avatar'), asyncErrorHandler(async (req, res) => {
-  req.body.avatar = req.file.path;
+  if (req.hasOwnProperty('file')) req.body.avatar = req.file.path;
   await usersService.updateUser(req.params.id, req.body);
   res.status(200).send('User was successfully updated');
 }));
