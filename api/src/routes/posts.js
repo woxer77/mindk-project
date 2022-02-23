@@ -2,6 +2,7 @@ const router = require('express').Router();
 const upload = require('../services/multer');
 const postsService = require('../services/store/posts.service');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
+const authMiddleware = require('../middlewares/authMiddleware');
 const path = require('path');
 
 module.exports = router;
@@ -27,19 +28,19 @@ router.get('/:id/image', asyncErrorHandler(async (req, res) => {
   res.status(200).sendFile(`${postImage[0].image}`, {root: path.dirname('')});
 }));
 
-router.post('/', upload.single('image'), asyncErrorHandler(async (req, res) => {
-  req.body.image = req.file.path;
+router.post('/', authMiddleware, upload.single('image'), asyncErrorHandler(async (req, res) => {
+  if (req.hasOwnProperty('file')) req.body.image = req.file.path;
   await postsService.createNewPost(req.body);
   res.status(200).send('New post has been successfully created');
 }));
 
-router.put('/:id', upload.single('image'), asyncErrorHandler(async (req, res) => {
-  req.body.image = req.file.path;
+router.put('/:id', authMiddleware, upload.single('image'), asyncErrorHandler(async (req, res) => {
+  if (req.hasOwnProperty('file')) req.body.image = req.file.path;
   await postsService.updatePostById(req.params.id, req.body);
   res.status(200).send('Post was successfully updated');
 }));
 
-router.delete('/:id', asyncErrorHandler(async (req, res) => {
+router.delete('/:id', authMiddleware, asyncErrorHandler(async (req, res) => {
   await postsService.deletePostById(req.params.id);
   res.status(200).send('Post was successfully deleted');
 }));

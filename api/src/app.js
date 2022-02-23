@@ -9,11 +9,11 @@ const postsRoutes = require('./routes/posts');
 const likesRoutes = require('./routes/likes');
 const commentsRoutes = require('./routes/comments');
 const authRoutes = require('./routes/auth');
+const passport = require('passport');
 
 const loggingMiddleware = require('./middlewares/loggingMiddleware');
 const errorHandler = require('./middlewares/errorHandler');
-const getGoogleStrategy = require('./services/google.strategy');
-const { registerStrategy, passport } = getGoogleStrategy();
+const registerStrategy = require('./services/google.strategy');
 
 const app = express();
 const port = config.appPort;

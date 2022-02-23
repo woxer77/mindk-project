@@ -4,35 +4,31 @@ const { createNewUser, getUserByEmail } = require('../services/store/users.servi
 const config = require('./config');
 
 module.exports = () => {
-  const registerStrategy = () => {
-    passport.use(
-      new GoogleTokenStrategy(
-        {
-          clientID: config.googleClientId,
-          clientSecret: config.clientSecret,
-        },
-        //  Passport verify callback
-        async (accessToken, refreshToken, profile, done) => {
-          const [{ value: email }] = profile.emails;
-          let user = await getUserByEmail(email);
-          if (!user) {
-            await createNewUser({
-              firstName: profile.name.givenName,
-              secondName: profile.name.familyName,
-              email,
-            });
-            user = await getUserByEmail(email);
-          }
-          return done(null, {
-            userId: user.userId,
-            firstName: user.firstName,
-            secondName: user.secondName,
-            email: user.email,
+  passport.use(
+    new GoogleTokenStrategy(
+      {
+        clientID: config.googleClientId,
+        clientSecret: config.clientSecret,
+      },
+      //  Passport verify callback
+      async (accessToken, refreshToken, profile, done) => {
+        const [{ value: email }] = profile.emails;
+        let user = await getUserByEmail(email);
+        if (!user) {
+          await createNewUser({
+            firstName: profile.name.givenName,
+            secondName: profile.name.familyName,
+            email,
           });
-        },
-      ),
-    );
-  };
-
-  return { registerStrategy, passport };
+          user = await getUserByEmail(email);
+        }
+        return done(null, {
+          userId: user.userId,
+          firstName: user.firstName,
+          secondName: user.secondName,
+          email: user.email,
+        });
+      },
+    ),
+  );
 };

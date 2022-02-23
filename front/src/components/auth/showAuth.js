@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import { Box, Typography } from '@mui/material';
+import { appPort, googleClientId } from '../../config/config';
 
 export function ShowAuth() {
   const decodeTokenToUserObj = (token) => {
@@ -12,7 +13,7 @@ export function ShowAuth() {
   const [googleAuthInfo, setGoogleAuthInfo] = useState({});
 
   const googleAuth = useCallback((data) => {
-    axios.post('http://localhost:2001/auth/google', {
+    axios.post(`http://localhost:${appPort}/auth/google`, {
       access_token: data.accessToken,
     })
       .then((response) => {
@@ -31,7 +32,7 @@ export function ShowAuth() {
       <>
         <Typography variant="h6" margin="5px">Authorization with Google OAuth 2.0</Typography>
         <GoogleLogin
-          clientId="705464841782-3jvmqkn8dp24lehpo10c48cbg79ochck.apps.googleusercontent.com" // TODO: вынести в dotenv
+          clientId={googleClientId}
           onSuccess={googleAuth}
           onFailure={(errors) => {
             console.log(errors);

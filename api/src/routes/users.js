@@ -40,7 +40,7 @@ router.post('/', authMiddleware, asyncErrorHandler(async (req, res) => {
 }));
 
 router.put('/:id', upload.single('avatar'), asyncErrorHandler(async (req, res) => {
-  req.body.avatar = req.file.path;
+  if (req.hasOwnProperty('file')) req.body.avatar = req.file.path;
   await usersService.updateUser(req.params.id, req.body);
   res.status(200).send('User was successfully updated');
 }));

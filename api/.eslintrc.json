@@ -21,7 +21,8 @@
         "prefer-const": "error",
         "no-use-before-define": "error",
         "quotes": ["error", "single"],
-        "indent": ["error", 2, { "SwitchCase": 1 }]
+        "indent": ["error", 2, { "SwitchCase": 1 }],
+        "no-prototype-builtins": "warn"
     },
     "plugins": [
         "prettier"

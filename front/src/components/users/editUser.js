@@ -13,6 +13,7 @@ import { serialize } from 'object-to-formdata';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import usersProps from '../../PropTypes/usersProps';
 import { editUser } from '../../containers/users/api/crud';
+import { maxUploadImageSize, fileTypeImage, appPort } from '../../config/config';
 
 export function EditUser({
   users, countries, defaultCode, defaultPhone,
@@ -20,9 +21,6 @@ export function EditUser({
   const [image, setImage] = useState();
   const [croppedImage, setCroppedImage] = useState();
   const [cropper, setCropper] = useState();
-
-  const MAX_IMAGE_SIZE = 10000000;
-  const FILE_TYPE_IMAGE = 'image.*';
 
   const schema = Yup.object().shape({
     firstName: Yup.string()
@@ -88,7 +86,7 @@ export function EditUser({
     e.preventDefault();
     const file = e.target.files[0];
 
-    if (file.type.match(FILE_TYPE_IMAGE) && file.size < MAX_IMAGE_SIZE) {
+    if (file.type.match(fileTypeImage) && file.size < maxUploadImageSize) {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
@@ -177,7 +175,7 @@ export function EditUser({
         Choose image:
       </Typography>
       {users.avatar && (
-        <img src={`http://localhost:2001/users/${users.userId}/avatar`} alt="" width={300} />
+        <img src={`http://localhost:${appPort}/users/${users.userId}/avatar`} alt="" width={300} />
       )}
       <Box width="600px" margin="0 auto">
         {!image && (

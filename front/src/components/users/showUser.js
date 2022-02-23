@@ -6,6 +6,7 @@ import {
   Grid, Box,
 } from '@mui/material';
 import usersProps from '../../PropTypes/usersProps';
+import { appPort } from '../../config/config';
 
 export function ShowUser({
   user,
@@ -41,7 +42,7 @@ export function ShowUser({
           {' '}
           <form
             encType="multipart/form-data"
-            action={`http://localhost:2001/users/${user.userId}/avatar`}
+            action={`http://localhost:${appPort}/users/${user.userId}/avatar`}
             method="POST"
           >
             <input type="file" name="avatar" />
