@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { ShowDatePage } from '../../components/date/showDatePage';
+import ShowDatePage from '../../components/date/showDatePage';
 
 let year;
 let month;
 let day;
 
-export function DateCont() {
+export default function DateCont() {
   const params = useParams();
 
   function getTodayDate() {

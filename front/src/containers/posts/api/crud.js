@@ -1,4 +1,4 @@
-import { apiClient } from '../../../config/axios';
+import { apiClient } from '../../../configs/axios';
 
 export const getPosts = async () => apiClient.get('/posts');
 export const createPost = async (data) => apiClient.post('/posts', data, {

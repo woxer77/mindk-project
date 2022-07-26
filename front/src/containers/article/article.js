@@ -2,13 +2,13 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
-import { ShowArticleByNumber } from '../../components/article/articleByNumber';
-import { ShowArticleByFormat } from '../../components/article/articleByFormat';
-import { ShowArticleByUpLetters } from '../../components/article/articleByUpLetters';
+import ShowArticleByNumber from '../../components/article/articleByNumber';
+import ShowArticleByFormat from '../../components/article/articleByFormat';
+import ShowArticleByUpLetters from '../../components/article/articleByUpLetters';
 
-const Article = ({
+export default function Article({
   text, creator, creationDate,
-}) => {
+}) {
   const params = useParams();
 
   function isUpperLetters(string) {
@@ -55,7 +55,7 @@ const Article = ({
     );
   }
   return (<div>Error 404</div>);
-};
+}
 
 Article.propTypes = {
   text: PropTypes.string.isRequired,
@@ -66,5 +66,3 @@ Article.propTypes = {
 Article.defaultProps = {
   creator: 'unknown creator',
 };
-
-export default Article;

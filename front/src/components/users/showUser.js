@@ -6,10 +6,10 @@ import {
   Grid, Box,
 } from '@mui/material';
 import usersProps from '../../PropTypes/usersProps';
-import { appPort } from '../../config/config';
+import { appPort } from '../../configs/config';
 import authContext from '../../contexts/authContext';
 
-export function ShowUser({
+export default function ShowUser({
   user,
 }) {
   const { authenticated, user: userData, setUserData } = useContext(authContext);

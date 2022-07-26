@@ -2,9 +2,9 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { getUser } from './api/crud';
-import { ShowUser } from '../../components/users/showUser';
+import ShowUser from '../../components/users/showUser';
 
-const UserContainer = () => {
+export default function UserContainer() {
   const params = useParams();
   const { id } = params;
 
@@ -25,6 +25,4 @@ const UserContainer = () => {
     );
   }
   return <div>Error 404</div>;
-};
-
-export default UserContainer;
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getUsers } from './api/crud';
-import { ShowAllUsers } from '../../components/users/showAllUsers';
+import ShowAllUsers from '../../components/users/showAllUsers';
 
-const UsersContainer = () => {
+export default function UsersContainer() {
   const { status, error, data } = useQuery('users', () => getUsers());
   const users = data?.data || [];
 
@@ -18,6 +18,4 @@ const UsersContainer = () => {
       )}
     </>
   );
-};
-
-export default UsersContainer;
+}

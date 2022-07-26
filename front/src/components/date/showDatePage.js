@@ -6,11 +6,11 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-export function ShowDatePage({
+export default function ShowDatePage({
   year, month, day, todayDate,
 }) {
   return (
-    <Box sx={{ width: '35%' }} className="dateContainer">
+    <Box className="dateContainer">
       <p>
         The date of your request:
         {' '}

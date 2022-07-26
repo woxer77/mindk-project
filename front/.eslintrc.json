@@ -52,6 +52,7 @@
         "react/jsx-props-no-spreading": "warn",
         "global-require": "warn",
         "react/default-props-match-prop-types": "warn",
-        "react/jsx-no-constructed-context-values": "warn"
+        "react/jsx-no-constructed-context-values": "warn",
+        "react/jsx-one-expression-per-line": "warn"
     }
 }

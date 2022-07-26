@@ -11,7 +11,7 @@ import './App.css';
 import ErrorBoundary from './components/ErrorBoudnary';
 import Article from './containers/article/article';
 import Profile from './components/profile/profile';
-import { DateCont } from './containers/date/date';
+import DateCont from './containers/date/date';
 import PostsContainer from './containers/posts/posts';
 import UsersContainer from './containers/users/users';
 import UserContainer from './containers/users/user';

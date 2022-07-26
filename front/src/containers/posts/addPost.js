@@ -1,7 +1,7 @@
 import React from 'react';
-import { AddPost } from '../../components/posts/addPost';
+import AddPost from '../../components/posts/addPost';
 
-const AddPostContainer = () => {
+export default function AddPostContainer() {
   const currentDate = () => {
     const dateObj = new Date();
     const day = String(dateObj.getDate()).padStart(2, '0');
@@ -15,6 +15,4 @@ const AddPostContainer = () => {
   return (
     <AddPost currentDate={currentDate} currentTime={currentTime} />
   );
-};
-
-export default AddPostContainer;
+}
