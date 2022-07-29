@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getPosts } from './api/crud';
-import { ShowAllPosts } from '../../components/posts/showAllPosts';
+import ShowAllPosts from '../../components/posts/showAllPosts';
 
-const PostsContainer = () => {
+export default function PostsContainer() {
   const { status, error, data } = useQuery('posts', () => getPosts());
   const posts = data?.data || [];
 
@@ -18,6 +18,4 @@ const PostsContainer = () => {
       )}
     </>
   );
-};
-
-export default PostsContainer;
+}

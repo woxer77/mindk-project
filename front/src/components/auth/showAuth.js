@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
-import { Box, Typography } from '@mui/material';
-import { appPort, googleClientId } from '../../config/config';
+import {
+  Box, Typography,
+} from '@mui/material';
+import { appPort, googleClientId } from '../../configs/config';
 
-export function ShowAuth() {
+export default function ShowAuth() {
   const decodeTokenToUserObj = (token) => {
-    if (token) return JSON.parse(atob(token.split('.')[1]));
+    if (token) return JSON.parse(Buffer.from(token.split('.')[1], 'base64'));
     return null;
   };
 
@@ -17,11 +19,13 @@ export function ShowAuth() {
       access_token: data.accessToken,
     })
       .then((response) => {
+        console.log('before set');
         setGoogleAuthInfo({
           accessToken: response.data.accessToken,
           refreshToken: response.data.refreshToken,
           user: decodeTokenToUserObj(response.data.accessToken),
         });
+        console.log('log');
       })
       .catch((error) => {
         console.log(error);

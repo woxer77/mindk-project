@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { ShowAuth } from '../../components/auth/showAuth';
+import React from 'react';
+import ShowAuth from '../../components/auth/showAuth';
 
-const AuthContainer = () => (
-  <ShowAuth />
-);
-
-export default AuthContainer;
+export default function AuthContainer() {
+  return (
+    <ShowAuth />
+  );
+}

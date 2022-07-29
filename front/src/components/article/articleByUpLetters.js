@@ -6,21 +6,20 @@ import {
 } from '@mui/material';
 import ArticleProps from '../../PropTypes/articleProps';
 
-export function ShowArticleByUpLetters({
+export default function ShowArticleByUpLetters({
   id, text, creator, creationDate,
 }) {
   return (
-    <Box sx={{ width: '50%' }} className="articleContainer">
+    <Box className="articleContainer">
       <p className="title">{`Article with ID by upper letters = ${id}`}</p>
-      <p className="text">{text}</p>
-      <p className="creator">{creator}</p>
-      <p className="creationDate">{creationDate}</p>
+      <p>{text}</p>
+      <p>{creator}</p>
+      <p>{creationDate}</p>
     </Box>
   );
 }
 
 ShowArticleByUpLetters.propTypes = ArticleProps;
-
 ShowArticleByUpLetters.defaultProps = {
   creator: 'unknown',
 };

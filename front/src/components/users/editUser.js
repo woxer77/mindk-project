@@ -13,9 +13,9 @@ import { serialize } from 'object-to-formdata';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import usersProps from '../../PropTypes/usersProps';
 import { editUser } from '../../containers/users/api/crud';
-import { maxUploadImageSize, fileTypeImage, appPort } from '../../config/config';
+import { maxUploadImageSize, fileTypeImage, appPort } from '../../configs/config';
 
-export function EditUser({
+export default function EditUser({
   users, countries, defaultCode, defaultPhone,
 }) {
   const [image, setImage] = useState();

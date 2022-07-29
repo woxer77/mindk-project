@@ -11,7 +11,7 @@ import './App.css';
 import ErrorBoundary from './components/ErrorBoudnary';
 import Article from './containers/article/article';
 import Profile from './components/profile/profile';
-import { DateCont } from './containers/date/date';
+import DateCont from './containers/date/date';
 import PostsContainer from './containers/posts/posts';
 import UsersContainer from './containers/users/users';
 import UserContainer from './containers/users/user';
@@ -19,19 +19,22 @@ import AddPostContainer from './containers/posts/addPost';
 import EditPostContainer from './containers/posts/editPost';
 import EditUserContainer from './containers/users/editUser';
 import AuthContainer from './containers/auth/auth';
+import RegContainer from './containers/reg/reg';
+import LoginContainer from './containers/login/login';
 import authContext from './contexts/authContext';
+import ProtectedRoute from './components/protectedRoute/protectedRoute';
+import GuestRoute from './components/guestRoute/guestRoute';
 
 const queryClient = new QueryClient();
 
 function App() {
   const [userData, setUserData] = useState({
-    authenticated: true,
+    authenticated: false,
     user: {
       userId: 1,
       firstName: 'default name',
       email: 'default@default.com',
     },
-    setUserData: () => {},
   });
 
   return (
@@ -41,17 +44,22 @@ function App() {
           <ErrorBoundary>
             <BrowserRouter>
               <Routes>
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/posts" element={<PostsContainer />} />
+                  <Route path="/posts/add-post" element={<AddPostContainer />} />
+                  <Route path="/posts/:id/edit-post" element={<EditPostContainer />} />
+                  <Route path="/users" element={<UsersContainer />} />
+                  <Route path="/users/:id" element={<UserContainer />} />
+                  <Route path="/users/:id/edit-user" element={<EditUserContainer />} />
+                </Route>
+                <Route element={<GuestRoute />}>
+                  <Route path="/auth" element={<AuthContainer />} />
+                  <Route path="/registration" element={<RegContainer />} />
+                  <Route path="/login" element={<LoginContainer />} />
+                </Route>
                 <Route path="/" element={<p>Hello, this is main page</p>} />
                 <Route path="*" element={<div>Error 404</div>} />
                 <Route path="/date/:date" element={<DateCont />} />
-                <Route path="/posts" element={<PostsContainer />} />
-                <Route path="/posts/add-post" element={<AddPostContainer />} />
-                <Route path="/posts/:id/edit-post" element={<EditPostContainer />} />
-                <Route path="/users" element={<UsersContainer />} />
-                <Route path="/users/:id" element={<UserContainer />} />
-                <Route path="/users/:id/edit-user" element={<EditUserContainer />} />
-                <Route path="/auth" element={<AuthContainer />} />
-
                 <Route
                   path="/article/:id"
                   element={(

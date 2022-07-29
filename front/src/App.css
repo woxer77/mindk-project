@@ -1,49 +1,7 @@
 .App {
+  margin: 0;
   text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
 }
-
-/*.App-header {*/
-/*  background-color: #282c34;*/
-/*  min-height: 100vh;*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  color: white;*/
-/*}*/
-
-/*.App-post {*/
-/*  position: relative;*/
-/*  width: 500px;*/
-/*  height: 700px;*/
-/*}*/
-
-/*.App-post-name {*/
-/*  font-width: 600;*/
-/*  font-size: 32px;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*}*/
-
-/*.App-post-name p {*/
-/*  margin: 0;*/
-/*}*/
-
-/*.App-post-name img {*/
-/*  width: 100px;*/
-/*  border-radius: 50px;*/
-/*}*/
-
-/*.App-post-text {*/
-/*  text-align: left;*/
-/*  text-indent: 1.5em;*/
-/*  font-size: 28px;*/
-/*  color: #c6c9c3;*/
-/*  background-color: #60646c;*/
-/*  border-radius: 20px;*/
-/*  padding: 10px;*/
-/*}*/
-
-/*.App-post-image {*/
-/*  height: 150px;*/
-/*}*/

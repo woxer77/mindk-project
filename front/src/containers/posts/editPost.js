@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { EditPost } from '../../components/posts/editPost';
+import EditPost from '../../components/posts/editPost';
 import { getPost } from './api/crud';
 
-const EditPostContainer = () => {
+export default function EditPostContainer() {
   const params = useParams();
   const { id } = params;
 
@@ -39,6 +39,4 @@ const EditPostContainer = () => {
   }
 
   return <div>Error 404</div>;
-};
-
-export default EditPostContainer;
+}

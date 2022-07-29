@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import usersProps from '../../PropTypes/usersProps';
 
-export function ShowAllUsers({
+export default function ShowAllUsers({
   users,
 }) {
   return (

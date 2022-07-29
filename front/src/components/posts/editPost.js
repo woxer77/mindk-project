@@ -16,9 +16,9 @@ import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import PropTypes from 'prop-types';
 import { editPost } from '../../containers/posts/api/crud';
 import postsProps from '../../PropTypes/postsProps';
-import { maxUploadImageSize, fileTypeImage, appPort } from '../../config/config';
+import { maxUploadImageSize, fileTypeImage, appPort } from '../../configs/config';
 
-export function EditPost({
+export default function EditPost({
   post, options, defaultLabel,
 }) {
   const [image, setImage] = useState();

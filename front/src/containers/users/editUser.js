@@ -2,9 +2,9 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { getUser } from './api/crud';
-import { EditUser } from '../../components/users/editUser';
+import EditUser from '../../components/users/editUser';
 
-const EditUserContainer = () => {
+export default function EditUserContainer() {
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
     { code: 'AE', label: 'United Arab Emirates', phone: '971' },
@@ -293,6 +293,4 @@ const EditUserContainer = () => {
     );
   }
   return <div>Error 404</div>;
-};
-
-export default EditUserContainer;
+}

@@ -3,7 +3,7 @@ import { Box, Container } from '@mui/material';
 import postsProps from '../../PropTypes/postsProps';
 import './posts.css';
 
-export function ShowAllPosts({
+export default function ShowAllPosts({
   posts,
 }) {
   return (

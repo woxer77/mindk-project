@@ -10,9 +10,9 @@ import Cropper from 'react-cropper';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import PropTypes from 'prop-types';
 import { createPost } from '../../containers/posts/api/crud';
-import { maxUploadImageSize, fileTypeImage } from '../../config/config';
+import { maxUploadImageSize, fileTypeImage } from '../../configs/config';
 
-export function AddPost({
+export default function AddPost({
   currentDate, currentTime,
 }) {
   const [image, setImage] = useState();
