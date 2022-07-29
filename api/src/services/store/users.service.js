@@ -1,6 +1,6 @@
 const db = require('../db');
 const passwordHasher = require('../passwordHasher');
-const config = require('../config');
+const config = require('../../configs/config');
 
 module.exports = {
   getAllUsers: async () => db.select().from('users').orderBy('userId'),

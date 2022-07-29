@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleTokenStrategy = require('passport-google-token').Strategy;
 const { createNewUser, getUserByEmail } = require('../services/store/users.service');
-const config = require('./config');
+const config = require('../configs/config');
 
 module.exports = () => {
   passport.use(

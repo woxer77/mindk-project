@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('../configs/config');
 
 module.exports = require('knex')({
   client: 'pg',

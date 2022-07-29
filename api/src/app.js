@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./services/db');
 
-const config = require('./services/config');
+const config = require('./configs/config');
 const usersRoutes = require('./routes/users');
 const postsRoutes = require('./routes/posts');
 const likesRoutes = require('./routes/likes');
