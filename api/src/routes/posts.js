@@ -3,7 +3,9 @@ const upload = require('../services/multer');
 const postsService = require('../services/store/posts.service');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const authMiddleware = require('../middlewares/authMiddleware');
+const aclMiddleware = require('../middlewares/aclMiddleware');
 const path = require('path');
+const { postUpdate, postDelete} = require('../configs/acl_config');
 
 module.exports = router;
 
@@ -34,13 +36,20 @@ router.post('/', authMiddleware, upload.single('image'), asyncErrorHandler(async
   res.status(200).send('New post has been successfully created');
 }));
 
-router.put('/:id', authMiddleware, upload.single('image'), asyncErrorHandler(async (req, res) => {
-  if (req.hasOwnProperty('file')) req.body.image = req.file.path;
-  await postsService.updatePostById(req.params.id, req.body);
-  res.status(200).send('Post was successfully updated');
-}));
+router.put('/:id',
+  authMiddleware,
+  aclMiddleware(postUpdate),
+  upload.single('image'),
+  asyncErrorHandler(async (req, res) => {
+    if (req.hasOwnProperty('file')) req.body.image = req.file.path;
+    await postsService.updatePostById(req.params.id, req.body);
+    res.status(200).send('Post was successfully updated');
+  }));
 
-router.delete('/:id', authMiddleware, asyncErrorHandler(async (req, res) => {
-  await postsService.deletePostById(req.params.id);
-  res.status(200).send('Post was successfully deleted');
-}));
+router.delete('/:id',
+  authMiddleware,
+  aclMiddleware(postDelete),
+  asyncErrorHandler(async (req, res) => {
+    await postsService.deletePostById(req.params.id);
+    res.status(200).send('Post was successfully deleted');
+  }));

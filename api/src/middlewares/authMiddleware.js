@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const UnauthorizedException = require('../exceptions/UnauthorizedException');
-const config = require('../services/config');
+const config = require('../configs/config');
 
 module.exports = async (req, res, next) => {
   if (req.headers.authorization) {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 
 import './style.css';
 import PropTypes from 'prop-types';
@@ -7,16 +7,10 @@ import {
 } from '@mui/material';
 import usersProps from '../../PropTypes/usersProps';
 import { appPort } from '../../config/config';
-import authContext from '../../contexts/authContext';
 
 export function ShowUser({
   user,
 }) {
-  const { authenticated, user: userData, setUserData } = useContext(authContext);
-  console.log(setUserData);
-  console.log('is user authenticated:', authenticated);
-  console.log('user data:', userData);
-
   return (
     <Box sx={{ width: '80%' }} className="usersContainer">
       <Grid className="userBlock">

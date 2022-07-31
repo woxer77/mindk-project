@@ -2,14 +2,14 @@ const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const { checkPassword, getUserById, getUserByEmail } = require('./store/users.service');
 const sessionService = require('./store/session.service');
-const { appKey } = require('./config');
+const { appKey } = require('../configs/config');
 
 module.exports = {
   authorize: async (email, password) => {
     const user = await getUserByEmail(email);
     if (user) {
       if (checkPassword(password, user.password)) {
-        const accessToken = jwt.sign({ 
+        const accessToken = jwt.sign({
           userId: user.userId,
           firstName: user.firstName
         }, appKey);
@@ -27,7 +27,7 @@ module.exports = {
     const session = await sessionService.getByToken(refreshToken);
     if (session) {
       const user = await getUserById(session.userId);
-      const accessToken = jwt.sign({ 
+      const accessToken = jwt.sign({
         userId: user.userId,
         firstName: user.firstName
       }, appKey);
