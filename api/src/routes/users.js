@@ -5,6 +5,7 @@ const path = require('path');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const authMiddleware = require('../middlewares/authMiddleware');
 const aclMiddleware = require('../middlewares/aclMiddleware');
+const validateMiddleware = require('../middlewares/validateMiddleware');
 const { userUpdate } = require('../configs/acl_config');
 
 module.exports = router;
@@ -36,14 +37,92 @@ router.post('/:id/avatar', authMiddleware, upload.single('avatar'), asyncErrorHa
   }
 }));
 
-router.post('/', authMiddleware, asyncErrorHandler(async (req, res) => {
-  await usersService.createNewUser(req.body);
-  res.status(200).send('New user has been successfully created');
-}));
+router.post('/',
+  authMiddleware,
+  validateMiddleware({
+    firstName: {
+      isRequired: true,
+      minLength: 2,
+      maxLength: 32,
+      regex: /^[A-Za-z ]*$/,
+    },
+    secondName: {
+      isRequired: true,
+      minLength: 2,
+      maxLength: 64,
+      regex: /^[A-Za-z ]*$/,
+    },
+    email: {
+      isRequired: true,
+      isUnique: true,
+      minLength: 6,
+      maxLength: 128,
+      email: true,
+    },
+    phone: {
+      isRequired: true,
+      isUnique: true,
+      regex: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
+    },
+  },
+  {
+    email: {
+      tableName: 'users',
+      fieldName: 'email',
+      id: 'userId',
+    },
+    phone: {
+      tableName: 'users',
+      fieldName: 'phone',
+      id: 'userId',
+    },
+  }),
+  asyncErrorHandler(async (req, res) => {
+    await usersService.createNewUser(req.body);
+    res.status(200).send('New user has been successfully created');
+  }));
 
 router.put('/:id',
   authMiddleware,
   aclMiddleware(userUpdate),
+  validateMiddleware({
+    firstName: {
+      isRequired: true,
+      minLength: 2,
+      maxLength: 32,
+      regex: /^[A-Za-z ]*$/,
+    },
+    secondName: {
+      isRequired: true,
+      minLength: 2,
+      maxLength: 64,
+      regex: /^[A-Za-z ]*$/,
+    },
+    email: {
+      isRequired: true,
+      isUnique: true,
+      minLength: 6,
+      maxLength: 128,
+      email: true,
+    },
+    phone: {
+      isRequired: true,
+      isUnique: true,
+      regex: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
+    },
+  },
+  {
+    email: {
+      tableName: 'users',
+      fieldName: 'email',
+      id: 'userId',
+    },
+    phone: {
+      tableName: 'users',
+      fieldName: 'phone',
+      id: 'userId',
+    },
+  }),
   upload.single('avatar'),
   asyncErrorHandler(async (req, res) => {
     if (req.hasOwnProperty('file')) req.body.avatar = req.file.path;

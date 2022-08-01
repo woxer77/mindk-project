@@ -23,7 +23,8 @@
         "quotes": ["error", "single"],
         "indent": ["error", 2, { "SwitchCase": 1 }],
         "no-prototype-builtins": "warn",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "no-case-declarations": "warn"
     },
     "plugins": [
         "prettier"
